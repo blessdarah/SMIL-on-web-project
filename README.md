@@ -11,7 +11,7 @@ This documentation is for the project on communicating with a SMIL player.
 2. Start the server with `npm start` 
 
 # Tasks
-[  ] Setup node server
+[ x ] Setup node server
 [  ] create form to setup content in SMIL message
 [  ] Save submitted data to sqlite file
 [  ] Construct SMIL file syntax from the content of the form submitted.
@@ -22,5 +22,4 @@ This documentation is for the project on communicating with a SMIL player.
 	[  ] View sent messages from the database
 	[  ] Resend any of the messages
 	[  ] Delete the messages
-	[  ] Edit any of the message and send to the play
-
+	[  ] Edit any of the message and send to the player

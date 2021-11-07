@@ -3,7 +3,8 @@ const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const sequelize = require('./database');
 const path = require('path');
-
+const multer = require('multer');
+const upload = multer();
 const app = express();
 
 const port = process.env.PORT || 8000;
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({
 
 // Parse application/json
 app.use(bodyParser.json());
+app.use(upload.array('imageFileSrc'));
 
 // setup static files
 app.use(express.static('public'));
@@ -32,6 +34,19 @@ app.set('view engine', 'hbs');
 // Setup routing
 app.get('/', (req, res) => {
     res.render('home');
+});
+
+app.post('/smil', (req, res) => {
+    const {
+        contentType,
+        imageUrl,
+        imageFileSrc,
+        videoUrl,
+        videoFileSrc
+    } = req.body;
+
+    console.log('form request data: ', req.body);
+    res.redirect('/');
 });
 
 
