@@ -1,0 +1,12 @@
+<smil>
+  <head>
+    <layout>
+      <region id="Text" height="100%" width="100%" fit="scroll"/>
+    </layout>
+  </head>
+  <body>
+    <par dur="3s">
+      <text src="test.txt" region="Text"/>
+    </par>
+  </body>
+</smil>

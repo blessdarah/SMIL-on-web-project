@@ -1,0 +1,31 @@
+<h3>Hello welcome to the SMIL application</h3>
+
+<form action="#" class="card">
+  <div class="card-header">
+    <h4 class="card-title">Add SMIL content</h4>
+  </div>
+  <div class="card-body">
+    <div class="form-group mb-2">
+      <label for="type" class="form-label">Select content type</label>
+      <select name="type" id="type" class="form-select">
+        <option value="image">Image</option>
+        <option value="text">Text</option>
+        <option value="video">Video</option>
+      </select>
+    </div>
+    <div class="form-group mb-3">
+      <label for="textContent" class="form-label">Input text content</label>
+      <textarea name="textContent" id="textContent" cols="30" rows="5" class="form-control"
+        placeholder="Enter the text content here"></textarea>
+    </div>
+    <div class="form-group mb-3">
+      <label for="imageUrl" class="form-label">Enter image url</label>
+      <input type="url" class="form-control" name="imageUrl" id="imageUrl" placeholder="Image url">
+    </div>
+    <div class="form-group mb-3">
+      <label for="imageFileSrc" class="form-label">Select image from your computer</label>
+      <input type="file" class="form-control form-file" name="imageFileSrc" id="imageFileSrc">
+    </div>
+  </div>
+
+</form>
