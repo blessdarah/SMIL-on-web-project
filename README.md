@@ -12,7 +12,7 @@ This documentation is for the project on communicating with a SMIL player.
 
 # Tasks
 [ x ] Setup node server
-[  ] create form to setup content in SMIL message
+[ x ] create form to setup content in SMIL message
 [  ] Save submitted data to sqlite file
 [  ] Construct SMIL file syntax from the content of the form submitted.
 	 The following tasks should be possible
