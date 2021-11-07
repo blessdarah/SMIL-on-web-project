@@ -1,3 +1,5 @@
+# SMIL-on-web-project
+Project to implement SMIL communication between a web app and a SMIL player installed.
 # Documentation
 ***
 
@@ -21,3 +23,4 @@ This documentation is for the project on communicating with a SMIL player.
 	[  ] Resend any of the messages
 	[  ] Delete the messages
 	[  ] Edit any of the message and send to the play
+
