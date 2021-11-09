@@ -38,13 +38,13 @@ exports.create = (req, res) => {
             // creat a file with `fileName` in the publick dir
             const filePath = path.join(__dirname, '/public/', `${fileName}.txt`);
             fs.writeFile(filePath, textContent, (error) => console.log('And error occured: ', error));
-            content = `<text src = "./public/${fileName}.txt" begin="${delay}s" region = "Text" />`;
+            content = `<text src = "./public/${fileName}.txt" begin="${delay || 1}s" region = "Text" />`;
             break;
         case 'image':
-            content = `<img src="${imageUrl}" begin="${delay}s" region = "Text" />`;
+            content = `<img src="${imageUrl}" begin="${delay || 1}s" region = "Text" />`;
             break;
         case 'video':
-            content = `<video src="${videoUrl}" begin="${delay}s" region = "Text" />`;
+            content = `<video src="${videoUrl}" begin="${delay || 1}s" region = "Text" />`;
             break;
         case 'imageFile':
             // handle image upload and return image file path
@@ -97,7 +97,6 @@ const getSmilContentFooter = () => {
 };
 
 function addSmilContent(smilDataList) {
-    console.log('smil data here: ', smilDataList);
     let listContent = '';
     smilDataList.map(smilData => {
         listContent += `<par dur= "${smilData.duration || 1}s">
@@ -111,8 +110,6 @@ function addSmilContent(smilDataList) {
         ${listContent}
     ${getSmilContentFooter()}
     `;
-
-    console.log('list data content: ', listContent);
 
     // write content to smile file
     fs.writeFile(path.join(__dirname, '../test.smil'), smilContent, (error) => error ? console.log('writing to file error: ', error) : '');
