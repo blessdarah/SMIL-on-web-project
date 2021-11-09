@@ -6,6 +6,7 @@ const path = require('path');
 const multer = require('multer');
 const upload = multer();
 const app = express();
+const SmilController = require('./controllers/SmilController');
 
 const port = process.env.PORT || 8000;
 
@@ -32,22 +33,10 @@ app.set('view engine', 'hbs');
 
 
 // Setup routing
-app.get('/', (req, res) => {
-    res.render('home');
-});
-
-app.post('/smil', (req, res) => {
-    const {
-        contentType,
-        imageUrl,
-        imageFileSrc,
-        videoUrl,
-        videoFileSrc
-    } = req.body;
-
-    console.log('form request data: ', req.body);
-    res.redirect('/');
-});
+app.get('/', SmilController.index);
+app.get('/home', SmilController.home);
+app.post('/create', SmilController.create);
+app.get('/generate', SmilController.generate);
 
 
 // DB

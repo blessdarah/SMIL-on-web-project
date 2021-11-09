@@ -1,0 +1,22 @@
+<h3>Hello welcome to the SMIL application</h3>
+
+{{#if message }}
+<div class="px-4 py-2 my-2 alert alert-success">
+  <h5 class="font-weight-bold">Info</h5>
+  {{ message }}
+</div>
+
+{{/if }}
+
+<a href="/home" class="btn btn-primary btn-sm">Add smil content</a>
+<a href="/generate" class="btn btn-sm btn-success" id="generate-data">generate smil data</a>
+
+<ul class="list-group">
+  {{#each data }}
+  <li class="list-group-item">
+    <p>{{contentType}}</p>
+    <p>{{content}}</p>
+    <p>{{duration}}</p>
+  </li>
+  {{/each }}
+</ul>

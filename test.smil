@@ -1,12 +1,18 @@
-<smil>
+
+    <smil>
   <head>
     <layout>
       <region id="Text" height="100%" width="100%" fit="scroll"/>
     </layout>
   </head>
   <body>
-    <par dur="3s">
-      <text src="test.txt" region="Text"/>
-    </par>
-  </body>
+        <par dur= "4s">
+            <text src = "./public/test_file.txt" begin="s" region = "Text" />
+        </par>
+        <par dur= "s">
+            <img src="https://unsplash.com/photos/DaURtI_hxvA" begin="s" region = "Text" />
+        </par>
+        
+    </body>
 </smil>
+    

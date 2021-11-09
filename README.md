@@ -13,10 +13,11 @@ This documentation is for the project on communicating with a SMIL player.
 # Tasks
 [ x ] Setup node server
 [ x ] create form to setup content in SMIL message
+[ x ] Process form data
 [  ] Save submitted data to sqlite file
-[  ] Construct SMIL file syntax from the content of the form submitted.
+[ x ] Construct SMIL file syntax from the content of the form submitted.
 	 The following tasks should be possible
-	 [  ] Create a new text file if the user is adding new text content to send
+	 [ x ] Create a new text file if the user is adding new text content to send
 	 [  ] Show images found in the assets dir or allow user to upload image from the file system
 [  ] Ensure user can view sent messages and perform the following subtasks
 	[  ] View sent messages from the database

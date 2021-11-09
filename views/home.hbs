@@ -1,6 +1,13 @@
-<h3>Hello welcome to the SMIL application</h3>
 <div class="row">
-  <form action="/smil" method="post" class="p-3 mx-auto rounded shadow col-md-6" enctype="multipart/form-data">
+  <form action="/create" method="post" class="p-3 mx-auto rounded shadow col-md-6" enctype="multipart/form-data">
+    <h4>Current step</h4>
+    <section id="steps">
+      <ul class="indicators">
+        <li class="indicator active">1</li>
+        <li class="indicator">2</li>
+        <li class="indicator">3</li>
+      </ul>
+    </section>
     <section id="step-one" class="mb-2">
       <div class="mb-3 form-group">
         <p class="mb-1">Select the content type you want to add</p>
@@ -35,6 +42,8 @@
         <label for="textContent" class="form-label">Input text content</label>
         <textarea name="textContent" id="textContent" cols="30" rows="5" class="form-control"
           placeholder="Enter the text content here"></textarea>
+        <label for="fileName" class="mt-4">Provide a file name for yout text content</label>
+        <input type="text" class="form-control" name="fileName" id="fileName" placeholder="file name">
       </div>
       {{!-- image url --}}
       <div class="mb-3 form-group d-none" id="imageUrl-group">
@@ -62,6 +71,30 @@
 
       <div class="step-buttons">
         <button class="px-3 btn btn-sm btn-secondary btn-prev" data-step='1'>prev</button>
+        <button class="px-3 btn btn-sm btn-primary btn-next" data-step='3'>next</button>
+      </div>
+    </section>
+
+    <section id="step-three" class="row d-none">
+      {{!-- video file --}}
+      <div class="mb-3 form-group d-none col-md-6" id="topPosition-group">
+        <label for="topPosition" class="form-label">Position on the y axis (from the top)</label>
+        <input type="number" class="form-control" name="topPosition" id="topPosition">
+      </div>
+      <div class="mb-3 form-group d-none col-md-6" id="leftPosition-group">
+        <label for="leftPosition" class="form-label">Position on the x axis (from the left)</label>
+        <input type="number" class="form-control" name="leftPosition" id="leftPosition">
+      </div>
+      <div class="mb-3 form-group d-none col-md-6" id="duration-group">
+        <label for="duration" class="form-label">Duration (in seconds)</label>
+        <input type="number" class="form-control" name="duration" id="duration" default="0" min="0">
+      </div>
+      <div class="mb-3 form-group d-none col-md-6" id="delay-group">
+        <label for="delay" class="form-label">Delay (in seconds)</label>
+        <input type="number" class="form-control" name="delay" default="0" min="0" id="delay">
+      </div>
+      <div class="step-buttons">
+        <button class="px-3 btn btn-sm btn-secondary btn-prev" data-step='2'>prev</button>
         <button type="submit" class="px-3 btn btn-sm btn-primary">submit</button>
       </div>
     </section>
