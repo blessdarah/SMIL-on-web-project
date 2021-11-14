@@ -6,11 +6,8 @@
     </layout>
   </head>
   <body>
-        <par dur="4s">
-            <text src = "./public/test_file.txt" begin="2s" region = "Text" />
-        </par>
-        <par dur="10s">
-            <img src="https://picsum.photos/500" begin="1s" region = "Text" />
+        <par dur= "50s">
+            <video src = "public/images/12f726a3a9ae708c1f9b48d372a70c5a" begin="1s" region="Text" />
         </par>
         
     </body>

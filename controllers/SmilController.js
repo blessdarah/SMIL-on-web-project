@@ -36,21 +36,30 @@ exports.create = (req, res) => {
     switch (contentType) {
         case 'text':
             // creat a file with `fileName` in the publick dir
-            const filePath = path.join(__dirname, '/public/', `${fileName}.txt`);
+            const filePath = path.join(__dirname, '../public/', `${fileName}.txt`);
             fs.writeFile(filePath, textContent, (error) => console.log('And error occured: ', error));
             content = `<text src = "./public/${fileName}.txt" begin="${delay || 1}s" region = "Text" />`;
             break;
         case 'image':
-            content = `<img src="${imageUrl}" begin="${delay || 1}s" region = "Text" />`;
+            content = `<img src="${imageUrl}" begin="${delay || 1}s" region="Text" />`;
             break;
         case 'video':
-            content = `<video src="${videoUrl}" begin="${delay || 1}s" region = "Text" />`;
+            content = `<video src="${videoUrl}" begin="${delay || 1}s" region="Text" />`;
             break;
         case 'imageFile':
             // handle image upload and return image file path
+            const {
+                imageFileSrc
+            } = req.files;
+            const file = imageFileSrc[0];
+            content = `<img src = "public/images/${file.filename}" begin="${delay || 1}s" region="Text" />`;
             break;
         case 'videoFile':
-            // handle image upload and return image file path
+            const {
+                videoFileSrc
+            } = req.files;
+            const video = videoFileSrc[0];
+            content = `<video src = "public/images/${video.filename}" begin="${delay || 1}s" region="Text" />`;
             break;
     }
 
