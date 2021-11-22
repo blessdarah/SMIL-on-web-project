@@ -2,12 +2,14 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const sequelize = require('./database');
 const path = require('path');
+const session = require('express-session');
 const multer = require('multer');
 const upload = multer({
     dest: 'public/images'
 });
 const app = express();
 const SmilController = require('./controllers/SmilController');
+const MessagesController = require('./controllers/MessagesController');
 
 const port = process.env.PORT || 8000;
 
@@ -19,6 +21,11 @@ app.use(express.urlencoded({
 
 // Parse application/json
 app.use(express.json());
+
+app.use(session({
+    secret: "smil player app",
+    cookie: {}
+}));
 
 
 // setup static files
@@ -44,8 +51,16 @@ const uploadHandler = upload.fields([{
 // Setup routing
 app.get('/', SmilController.index);
 app.get('/home', SmilController.home);
+app.post('/smil-messages/:id/delete', SmilController.delete);
 app.post('/create', uploadHandler, SmilController.create);
 app.get('/generate', SmilController.generate);
+
+// messages
+app.get('/messages', MessagesController.index);
+app.get('/messages/create', MessagesController.create);
+app.post('/messages/store', MessagesController.store);
+app.post('/messages/:id/delete', MessagesController.delete);
+app.get('/messages/:id/details', MessagesController.details);
 
 
 // DB

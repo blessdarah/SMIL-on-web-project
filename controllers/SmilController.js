@@ -20,6 +20,7 @@ exports.home = (req, res) => {
 };
 
 exports.create = (req, res) => {
+    const file = req.session.file;
     const {
         contentType,
         textContent,
@@ -66,6 +67,7 @@ exports.create = (req, res) => {
     // save content to database
     SmilModel.create({
             smil_id: uuid(),
+            file,
             contentType,
             content,
             duration,
@@ -75,7 +77,16 @@ exports.create = (req, res) => {
         }).then(response => response)
         .catch(error => console.error('Could not create smil data: ', error));
 
-    res.redirect('/');
+    res.redirect(`/messages/${file}/details`);
+};
+
+exports.delete = (req, res) => {
+    SmilModel.destroy({
+            where: {
+                smil_id: req.params.id
+            }
+        }).then(feedback => res.status(201).redirect(`/messages/${req.session.file}/details`))
+        .catch(error => console.log('deleting smil message error: ', error));
 };
 
 exports.generate = async(req, res) => {
@@ -88,6 +99,8 @@ exports.generate = async(req, res) => {
 
     res.redirect('/');
 };
+
+
 
 
 const getSmilContentHeader = () => {

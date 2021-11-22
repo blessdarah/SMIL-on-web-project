@@ -6,8 +6,11 @@
     </layout>
   </head>
   <body>
-        <par dur= "50s">
-            <video src = "public/images/12f726a3a9ae708c1f9b48d372a70c5a" begin="1s" region="Text" />
+        <par dur= "3s">
+            <text src = "./public/jiu.txt" begin="1s" region = "Text" />
+        </par>
+        <par dur= "2s">
+            <text src = "./public/test_file.txt" begin="1s" region = "Text" />
         </par>
         
     </body>

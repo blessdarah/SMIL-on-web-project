@@ -18,7 +18,9 @@ This documentation is for the project on communicating with a SMIL player.
 [ x ] Construct SMIL file syntax from the content of the form submitted.
 	The following tasks should be possible
 	[ x ] Create a new text file if the user is adding new text content to send
-	[  ] Show images found in the assets dir or allow user to upload image from the file system
+	[ x ] Show images found in the assets dir or allow user to upload image from the file system
+[ ] Group multiple file data into a singe SMIL message file
+[ ] Store SMIL files into the database.
 [  ] Ensure user can view sent messages and perform the following subtasks
 	[  ] View sent messages from the database
 	[  ] Resend any of the messages

@@ -1,0 +1,154 @@
+<button href="/home" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Add smil
+  content</button>
+<a href="/generate" class="btn btn-sm btn-success" id="generate-data">generate smil data</a>
+{{#if data }}
+<table class="table stripped mt-4">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Type of content</th>
+      <th>Duration (in seconds)</th>
+      <th>Options</th>
+    </tr>
+
+  </thead>
+  <tbody>
+    {{#each data }}
+    <tr>
+      <td>{{smil_id}}</td>
+      <td>{{contentType}}</td>
+      <td>{{duration}}s</td>
+      <td>
+        <form method="post" action="/smil-messages/{{smil_id}}/delete" class="form-inline form">
+          <button type="submit" class="btn btn-sm btn-danger">delete</button>
+        </form>
+
+        <button class="btn btn-sm btn-info">update</button>
+      </td>
+    </tr>
+    {{/each }}
+  </tbody>
+</table>
+{{else }}
+<div class="alert alert-info mt-4">
+  <p class="mb-0">There are not messages for this file</p>
+</div>
+{{/if }}
+
+<div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add smil message content</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p0">
+        <div class="row">
+          <form action="/create" method="post" enctype="multipart/form-data">
+            <h4>Current step</h4>
+            <section id="steps">
+              <ul class="indicators">
+                <li class="indicator active">1</li>
+                <li class="indicator">2</li>
+                <li class="indicator">3</li>
+              </ul>
+            </section>
+            <section id="step-one" class="mb-2">
+              <div class="mb-3 form-group">
+                <p class="mb-1">Select the content type you want to add</p>
+                <label class="py-2 form-check-label d-block">
+                  <input type="radio" class="form-radio-input" name="contentType" value="text" checked>
+                  Text
+                </label>
+                <label class="py-2 form-check-label d-block">
+                  <input type="radio" class="form-radio-input" name="contentType" value="image" checked>
+                  Image url
+                </label>
+                <label class="py-2 form-check-label d-block">
+                  <input type="radio" class="form-radio-input" name="contentType" value="imageFile" checked>
+                  Image from local machine
+                </label>
+                <label class="py-2 form-check-label d-block">
+                  <input type="radio" class="form-radio-input" name="contentType" value="video" checked>
+                  Video url
+                </label>
+                <label class="py-2 form-check-label d-block">
+                  <input type="radio" class="form-radio-input" name="contentType" value="videoFile" checked>
+                  Video from local machine
+                </label>
+              </div>
+              <div class="form-group">
+                <button class="px-3 btn btn-sm btn-primary btn-next" data-step='2' id="step-one-button">next</button>
+              </div>
+            </section>
+
+            <section id="step-two" class="d-none">
+              <div class="mb-3 form-group d-none" id="textContent-group">
+                <label for="textContent" class="form-label">Input text content</label>
+                <textarea name="textContent" id="textContent" cols="30" rows="5" class="form-control"
+                  placeholder="Enter the text content here"></textarea>
+                <label for="fileName" class="mt-4">Provide a file name for yout text content</label>
+                <input type="text" class="form-control" name="fileName" id="fileName" placeholder="file name">
+              </div>
+              {{!-- image url --}}
+              <div class="mb-3 form-group d-none" id="imageUrl-group">
+                <label for="imageUrl" class="form-label">Enter image url</label>
+                <input type="url" class="form-control" name="imageUrl" id="imageUrl" placeholder="Image url">
+              </div>
+
+              {{!-- image file --}}
+              <div class="mb-3 form-group d-none" id="imageFileSrc-group">
+                <label for="imageFileSrc" class="form-label">Select image from your computer</label>
+                <input type="file" class="form-control form-file" name="imageFileSrc" id="imageFileSrc">
+              </div>
+
+              {{!-- video url --}}
+              <div class="mb-3 form-group d-none" id="videoUrl-group">
+                <label for="videoUrl" class="form-label">Enter video url</label>
+                <input type="url" class="form-control" name="videoUrl" id="videoUrl" placeholder="Video url">
+              </div>
+
+              {{!-- video file --}}
+              <div class="mb-3 form-group d-none" id="videoFileSrc-group">
+                <label for="videoFileSrc" class="form-label">Select video from your computer</label>
+                <input type="file" class="form-control form-file" name="videoFileSrc" id="videoFileSrc">
+              </div>
+
+              <div class="step-buttons">
+                <button class="px-3 btn btn-sm btn-secondary btn-prev" data-step='1'>prev</button>
+                <button class="px-3 btn btn-sm btn-primary btn-next" data-step='3'>next</button>
+              </div>
+            </section>
+
+            <section id="step-three" class="row d-none">
+              {{!-- video file --}}
+              <div class="mb-3 form-group d-none col-md-6" id="topPosition-group">
+                <label for="topPosition" class="form-label">Position on the y axis (from the top)</label>
+                <input type="number" class="form-control" name="topPosition" id="topPosition">
+              </div>
+              <div class="mb-3 form-group d-none col-md-6" id="leftPosition-group">
+                <label for="leftPosition" class="form-label">Position on the x axis (from the left)</label>
+                <input type="number" class="form-control" name="leftPosition" id="leftPosition">
+              </div>
+              <div class="mb-3 form-group d-none col-md-6" id="duration-group">
+                <label for="duration" class="form-label">Duration (in seconds)</label>
+                <input type="number" class="form-control" name="duration" id="duration" default="0" min="0">
+              </div>
+              <div class="mb-3 form-group d-none col-md-6" id="delay-group">
+                <label for="delay" class="form-label">Delay (in seconds)</label>
+                <input type="number" class="form-control" name="delay" default="0" min="0" id="delay">
+              </div>
+              <div class="step-buttons">
+                <button class="px-3 btn btn-sm btn-secondary btn-prev" data-step='2'>prev</button>
+                <button type="submit" class="px-3 btn btn-sm btn-primary">submit</button>
+              </div>
+            </section>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

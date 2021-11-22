@@ -8,10 +8,10 @@ const SmilModel = sequelize.define('smil', {
         allowNull: false,
         primaryKey: true
     },
-    // file: {
-    //     type: Sequelize.STRING,
-    //     allowNull: false
-    // },
+    file: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     contentType: {
         type: Sequelize.STRING,
         allowNull: false
