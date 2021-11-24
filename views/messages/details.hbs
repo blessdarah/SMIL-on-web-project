@@ -1,6 +1,7 @@
 <button href="/home" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Add smil
   content</button>
 <a href="/generate" class="btn btn-sm btn-success" id="generate-data">generate smil data</a>
+<a href="/messages/preview" class="btn btn-sm btn-success">preview</a>
 {{#if data }}
 <table class="table stripped mt-4">
   <thead>
@@ -23,6 +24,7 @@
           <button type="submit" class="btn btn-sm btn-danger">delete</button>
         </form>
 
+        <a href="/message/{{smil_id}}/show" class="btn btn-sm btn-success">show</a>
         <button class="btn btn-sm btn-info">update</button>
       </td>
     </tr>
@@ -44,7 +46,7 @@
       </div>
       <div class="modal-body p0">
         <div class="row">
-          <form action="/create" method="post" enctype="multipart/form-data">
+          <form action="/create" method="post" enctype="multipart/form-data" id="smil-form">
             <h4>Current step</h4>
             <section id="steps">
               <ul class="indicators">

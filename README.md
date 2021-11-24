@@ -19,10 +19,12 @@ This documentation is for the project on communicating with a SMIL player.
 	The following tasks should be possible
 	[ x ] Create a new text file if the user is adding new text content to send
 	[ x ] Show images found in the assets dir or allow user to upload image from the file system
-[ ] Group multiple file data into a singe SMIL message file
-[ ] Store SMIL files into the database.
+[ x ] Group multiple file data into a singe SMIL message file
+[ x ] Store SMIL files into the database.
 [  ] Ensure user can view sent messages and perform the following subtasks
-	[  ] View sent messages from the database
+	[ x ] View sent messages from the database
 	[  ] Resend any of the messages
-	[  ] Delete the messages
+	[ x ] Delete the messages
 	[  ] Edit any of the message and send to the player
+	[  ] Preview generated smil content
+	[ x ] Show the details of smil file components

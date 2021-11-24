@@ -20,6 +20,9 @@ const SmilModel = sequelize.define('smil', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    smilContent: {
+        type: Sequelize.STRING,
+    },
     duration: {
         type: Sequelize.INTEGER,
         allowNull: true,

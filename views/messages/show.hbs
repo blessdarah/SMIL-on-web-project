@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between align-items-end mb-2">
+  <h3>Message details</h3>
+  <button class="btn btn-info btn-sm" onclick="window.history.back()">back</button>
+</div>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th style="width: 200px">Field</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each data }}
+    <tr>
+      <td>Id</td>
+      <td>{{smil_id}}</td>
+    </tr>
+    <tr>
+      <td>Type</td>
+      <td><span class="badge bg-primary">{{contentType}}</span></td>
+    </tr>
+    <tr>
+      <td>Content</td>
+      <td>
+        <div class="card border-light bg-light">
+          <div class="card-body">
+            {{content}}
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Smil Data</td>
+      <td>{{smilContent}}</td>
+    </tr>
+    <tr>
+      <td>Duration</td>
+      <td>{{duration}}s</td>
+    </tr>
+    {{/each }}
+  </tbody>
+</table>

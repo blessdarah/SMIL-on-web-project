@@ -33,19 +33,22 @@ exports.create = (req, res) => {
         delay
     } = req.body;
 
-    let content;
+    let smilContent, content;
     switch (contentType) {
         case 'text':
             // creat a file with `fileName` in the publick dir
             const filePath = path.join(__dirname, '../public/', `${fileName}.txt`);
             fs.writeFile(filePath, textContent, (error) => console.log('And error occured: ', error));
-            content = `<text src = "./public/${fileName}.txt" begin="${delay || 1}s" region = "Text" />`;
+            smilContent = `<text src = "./public/${fileName}.txt" begin="${delay || 1}s" region = "Text" />`;
+            content = textContent;
             break;
         case 'image':
-            content = `<img src="${imageUrl}" begin="${delay || 1}s" region="Text" />`;
+            smilContent = `<img src="${imageUrl}" begin="${delay || 1}s" region="Text" />`;
+            content = imageUrl;
             break;
         case 'video':
-            content = `<video src="${videoUrl}" begin="${delay || 1}s" region="Text" />`;
+            smilContent = `<video src="${videoUrl}" begin="${delay || 1}s" region="Text" />`;
+            content = videoUrl;
             break;
         case 'imageFile':
             // handle image upload and return image file path
@@ -53,14 +56,16 @@ exports.create = (req, res) => {
                 imageFileSrc
             } = req.files;
             const file = imageFileSrc[0];
-            content = `<img src = "public/images/${file.filename}" begin="${delay || 1}s" region="Text" />`;
+            smilContent = `<img src = "public/images/${file.filename}" begin="${delay || 1}s" region="Text" />`;
+            content = "public/images/${file.filename}";
             break;
         case 'videoFile':
             const {
                 videoFileSrc
             } = req.files;
             const video = videoFileSrc[0];
-            content = `<video src = "public/images/${video.filename}" begin="${delay || 1}s" region="Text" />`;
+            smilContent = `<video src = "public/images/${video.filename}" begin="${delay || 1}s" region="Text" />`;
+            content = "public/images/${video.filename}";
             break;
     }
 
@@ -70,6 +75,7 @@ exports.create = (req, res) => {
             file,
             contentType,
             content,
+            smilContent,
             duration,
             delay,
             leftPosition,
@@ -135,6 +141,7 @@ function addSmilContent(smilDataList) {
 
     // write content to smile file
     fs.writeFile(path.join(__dirname, '../test.smil'), smilContent, (error) => error ? console.log('writing to file error: ', error) : '');
+    fs.writeFile(path.join(__dirname, '../preview.txt'), smilContent, (error) => error ? console.log('writing to file error: ', error) : '');
 
     // run command to open file with smil player
 }

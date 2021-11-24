@@ -48,6 +48,7 @@
         <div class="navbar-nav">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
           <a class="nav-link active" aria-current="page" href="/messages">Messages</a>
+          <a class="nav-link active" aria-current="page" href="/settings">Settings</a>
         </div>
       </div>
     </div>
@@ -61,10 +62,12 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
   <script>
-    const form = document.querySelector('form');
+    const form = document.querySelector('#smil-form');
     const stepOneSection = document.querySelector('#step-one');
     const stepTwoSection = document.querySelector('#step-two');
     const stepThreeSection = document.querySelector('#step-three');
+    const previewDataBtn = document.querySelector('#preview-data');
+
     let currentStep = 1;
 
     /* indicators */
@@ -74,8 +77,6 @@
     const nextButtons = Array.from(document.querySelectorAll('.btn-next'));
     const prevButtons = Array.from(document.querySelectorAll('.btn-prev'));
     const stepOneButton = document.querySelector('#step-one-button');
-
-    console.log('prev buttons: ', prevButtons);
 
     /* Form fields */
     const inputType = document.querySelector('#inputType');

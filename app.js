@@ -10,6 +10,7 @@ const upload = multer({
 const app = express();
 const SmilController = require('./controllers/SmilController');
 const MessagesController = require('./controllers/MessagesController');
+const SettingsController = require('./controllers/SettingsController');
 
 const port = process.env.PORT || 8000;
 
@@ -49,7 +50,6 @@ const uploadHandler = upload.fields([{
     }
 ]);
 // Setup routing
-app.get('/', SmilController.index);
 app.get('/home', SmilController.home);
 app.post('/smil-messages/:id/delete', SmilController.delete);
 app.post('/create', uploadHandler, SmilController.create);
@@ -57,10 +57,16 @@ app.get('/generate', SmilController.generate);
 
 // messages
 app.get('/messages', MessagesController.index);
+app.get('/', MessagesController.index);
 app.get('/messages/create', MessagesController.create);
 app.post('/messages/store', MessagesController.store);
 app.post('/messages/:id/delete', MessagesController.delete);
 app.get('/messages/:id/details', MessagesController.details);
+app.get('/message/:id/show', MessagesController.show);
+app.get('/messages/preview', MessagesController.preview);
+
+app.get('/settings', SettingsController.index);
+app.post('/settings', SettingsController.update);
 
 
 // DB

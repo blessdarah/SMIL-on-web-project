@@ -1,5 +1,7 @@
 const Message = require('../models/MessageModel');
 const SmilModel = require('../models/SmilModel');
+const fs = require('fs');
+const path = require('path');
 
 exports.index = (req, res) => {
     Message.findAll().
@@ -59,4 +61,35 @@ exports.details = (req, res) => {
             });
         })
         .catch(error => console.log('message detail error: ', error));
+};
+
+exports.show = (req, res) => {
+    req.session.file = req.params.id;
+    SmilModel.findAll({
+            where: {
+                smil_id: req.params.id
+            }
+        }).then(result => {
+            console.log('message result: ', result);
+            res.render('messages/show', {
+                data: result.map(item => item.dataValues)
+            });
+        })
+        .catch(error => console.log('message detail error: ', error));
+};
+
+exports.preview = (req, res) => {
+    // read data in preview file
+    const filePath = path.join(__dirname, '../preview.txt');
+    console.log('file path name: ', filePath);
+
+    fs.readFile(filePath, (err, result) => {
+        if (err) {
+            console.log('could not read file', err);
+        } else {
+            res.status(201).render('messages/preview', {
+                data: result.toString()
+            });
+        }
+    });
 };
