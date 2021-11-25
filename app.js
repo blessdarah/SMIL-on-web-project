@@ -65,9 +65,6 @@ app.get('/messages/:id/details', MessagesController.details);
 app.get('/message/:id/show', MessagesController.show);
 app.get('/messages/preview', MessagesController.preview);
 
-app.get('/settings', SettingsController.index);
-app.post('/settings', SettingsController.update);
-
 
 // DB
 // sequelize.sync();

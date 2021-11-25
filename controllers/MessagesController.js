@@ -90,24 +90,26 @@ exports.preview = (req, res) => {
         if (err) {
             console.log('could not read file', err);
         } else {
-            const playerPath = `C:\\Users\\bless\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Ambulant\\Ambulant Player 2.6\\Ambulant Player`;
-            // const invokeExpression = "Invoke-Expression ./test.smil"; // for windows
-            // const invokeExpression = "open ./test.smil";
-            const invokeExpression = "Powershell.exe -Command Invoke-Expression ./test.smil"; // working
-            exec(`${invokeExpression}`, (error, stdout, stderr) => {
-                if (error) {
-                    console.log(`error: ${error.message}`);
-                    return;
-                }
-                if (stderr) {
-                    console.log(`stderr: ${stderr}`);
-                    return;
-                }
-                console.log(`stdout: ${stdout}`);
-            });
             res.status(201).render('messages/preview', {
                 data: result.toString()
             });
         }
+    });
+};
+
+exports.play = (req, res) => {
+    // const invokeExpression = "Invoke-Expression ./test.smil"; // for windows
+    // const invokeExpression = "open ./test.smil";
+    const invokeExpression = "Powershell.exe -Command Invoke-Expression ./test.smil"; // working
+    exec(`${invokeExpression}`, (error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
     });
 };
