@@ -26,27 +26,21 @@ exports.store = (req, res) => {
 };
 
 exports.delete = async(req, res) => {
+    console.log('deleting ', req.params.id);
     try {
+        // delete all smil content for this file
+        await SmilModel.destroy({
+            where: {
+                file: req.session.file || req.params.id
+            }
+        });
+
         await Message.destroy({
             where: {
                 id: req.params.id
             }
         });
-
-        // get all smil content matching the current file
-        const smilData = await SmilModel.findAll({
-            where: {
-                file: req.params.id
-            }
-        });
-        if (smilData.length > 0) {
-            await SmilModel.destroy({
-                where: {
-                    file: req.session.file || req.params.id
-                }
-            });
-        }
-
+        res.status(201).redirect('/');
     } catch (error) {
         console.log('delete error: ', error);
     }
@@ -67,7 +61,7 @@ exports.details = (req, res) => {
 };
 
 exports.show = (req, res) => {
-    req.session.file = req.params.id;
+    // req.session.file = req.params.id;
     SmilModel.findAll({
             where: {
                 smil_id: req.params.id

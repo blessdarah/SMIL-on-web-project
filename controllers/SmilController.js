@@ -106,9 +106,6 @@ exports.generate = async(req, res) => {
     res.redirect(`messages/${req.session.file}/details`);
 };
 
-
-
-
 const getSmilContentHeader = () => {
     return `<smil>
   <head>
