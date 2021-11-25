@@ -10,7 +10,6 @@ const upload = multer({
 const app = express();
 const SmilController = require('./controllers/SmilController');
 const MessagesController = require('./controllers/MessagesController');
-const SettingsController = require('./controllers/SettingsController');
 
 const port = process.env.PORT || 8000;
 
@@ -56,20 +55,20 @@ app.post('/create', uploadHandler, SmilController.create);
 app.get('/generate', SmilController.generate);
 
 // messages
-app.get('/messages', MessagesController.index);
 app.get('/', MessagesController.index);
+app.get('/messages', MessagesController.index);
 app.get('/messages/create', MessagesController.create);
 app.post('/messages/store', MessagesController.store);
 app.post('/messages/:id/delete', MessagesController.delete);
 app.get('/messages/:id/details', MessagesController.details);
 app.get('/message/:id/show', MessagesController.show);
 app.get('/messages/preview', MessagesController.preview);
-
+app.get('/play', MessagesController.play);
 
 // DB
-// sequelize.sync();
-sequelize.sync({
-    force: true
-});
+sequelize.sync();
+// sequelize.sync({
+//     force: true
+// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

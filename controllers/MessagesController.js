@@ -100,6 +100,7 @@ exports.preview = (req, res) => {
 exports.play = (req, res) => {
     // const invokeExpression = "Invoke-Expression ./test.smil"; // for windows
     // const invokeExpression = "open ./test.smil";
+    console.log('calling the play function');
     const invokeExpression = "Powershell.exe -Command Invoke-Expression ./test.smil"; // working
     exec(`${invokeExpression}`, (error, stdout, stderr) => {
         if (error) {
@@ -112,4 +113,7 @@ exports.play = (req, res) => {
         }
         console.log(`stdout: ${stdout}`);
     });
+
+    res.redirect('messages/preview');
+
 };

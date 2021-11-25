@@ -103,7 +103,7 @@ exports.generate = async(req, res) => {
         })
         .catch(err => console.log('fetch error ', err));
 
-    res.redirect('/');
+    res.redirect(`messages/${req.session.file}/details`);
 };
 
 
@@ -128,7 +128,7 @@ function addSmilContent(smilDataList) {
     let listContent = '';
     smilDataList.map(smilData => {
         listContent += `<par dur= "${smilData.duration || 1}s">
-            ${smilData.content}
+            ${smilData.smilContent}
         </par>
         `;
     });
