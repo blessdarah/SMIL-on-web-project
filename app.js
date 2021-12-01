@@ -4,14 +4,33 @@ const sequelize = require('./database');
 const path = require('path');
 const session = require('express-session');
 const multer = require('multer');
+const WebSocket = require('ws');
 const upload = multer({
     dest: 'public/images'
 });
+const port = process.env.PORT || 8000;
 const app = express();
+
+// const http = require('http');
+// const server = http.createServer(app);
+
+// allow socket to listen to server
+const socketServer = new WebSocket.Server({ port: 5000 });
+
+socketServer.on('connection', (socket) => {
+    socket.on('message', (message) => {
+        // console.log('Received %s', message);
+        socketServer.clients.forEach(client => client.send(message)); /* Send messages to all clients */
+        // socket.send(`Hello you sent ${message}`);
+    });
+
+    socket.send('Message coming from a socket server');
+});
+
+
 const SmilController = require('./controllers/SmilController');
 const MessagesController = require('./controllers/MessagesController');
 
-const port = process.env.PORT || 8000;
 
 // Parsing middleware
 // Parse application/x-www-form

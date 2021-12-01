@@ -5,6 +5,7 @@
   </form>
 </div>
 
+<button class="btn btn-danger btn-lg btn-socket">Test web socket</button>
 {{#if messages}}
 <ul class="list-group">
   {{#each messages }}
@@ -14,11 +15,11 @@
       <span class="ml-4">{{ createdAt }}</span>
     </div>
     <div class="d-inline-flex justify-content-between">
-      <form method="post" action="/messages/{{ id }}/delete" class="form-inline mr-2">
+      <form method="post" action="/messages/{{ id }}/delete" class="mr-2 form-inline">
         <button class="btn btn-danger btn-sm" href="#">Delete</button>
       </form>
 
-      <a class="btn btn-outline-success btn-sm ml-2" href="/messages/{{ id }}/details">Details</a>
+      <a class="ml-2 btn btn-outline-success btn-sm" href="/messages/{{ id }}/details">Details</a>
     </div>
   </li>
   {{/each }}
@@ -26,3 +27,5 @@
 {{else }}
 <p>No content created yet</p>
 {{/if }}
+
+<ul class="list-group" id="web-socket-data"></ul>
