@@ -6,8 +6,11 @@
     </layout>
   </head>
   <body>
-        <par dur= "4s">
+        <par dur= "5s">
             <text src = "./public/test.txt" begin="1s" region = "Text" />
+        </par>
+        <par dur= "6s">
+            <img src="https://picsum.photos/500" begin="1s" region="Text" />
         </par>
         
     </body>

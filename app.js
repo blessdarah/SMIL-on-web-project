@@ -24,7 +24,7 @@ socketServer.on('connection', (socket) => {
         // socket.send(`Hello you sent ${message}`);
     });
 
-    socket.send('Message coming from a socket server');
+    // socket.send('Message coming from a socket server');
 });
 
 

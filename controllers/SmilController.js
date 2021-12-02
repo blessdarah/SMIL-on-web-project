@@ -100,6 +100,7 @@ exports.generate = async(req, res) => {
         .then(smil => {
             smil = smil.map(item => item.dataValues);
             addSmilContent(smil);
+            req.session.message = "Smil content has been generated";
         })
         .catch(err => console.log('fetch error ', err));
 

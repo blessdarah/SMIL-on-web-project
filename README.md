@@ -31,4 +31,11 @@ This documentation is for the project on communicating with a SMIL player.
 	- [x] Preview generated smil content
 	- [x] Show the details of smil file components
 
-- [] Add websocket communication for multiple servers running the same instance of the application.
+- [x] Add websocket communication for multiple servers running the same instance of the application.
+- [] Handle push notification with websocket after any message has been added or smil content.
+	   This message, 
+
+## Resources
+1. https://www.nerdeez.com/articles/node/express-websockets
+2. https://masteringjs.io/tutorials/node/websocket-server
+3. https://medium.com/factory-mind/websocket-node-js-express-step-by-step-using-typescript-725114ad5fe4
