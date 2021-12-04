@@ -75,8 +75,6 @@
   <script>
     const ws = new WebSocket('ws://localhost:5000');
 
-    const socketButton = document.querySelector('#btn-socket');
-
     ws.onerror = function (err) {
       console.error('failed to make websocket connection');
       throw err;
@@ -97,29 +95,19 @@
 
         reader.onload = () => {
           const toaster = document.createElement('div');
-          toaster.innerHTML = `<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                            <div class="toast-header">
-                              <img src="..." class="rounded mr-2" alt="...">
-                              <strong class="mr-auto">Notification</strong>
-                              <small class="text-muted">just now</small>
-                              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="toast-body">
-                              ${reader.result}
-                              <a href="/play" class="btn btn-sm btn-info mt-3">play message</a>
-                            </div>
-                          </div>`;
+          toaster.innerHTML = `<div class="alert alert-success d-flex align-items-center" role="alert">
+		  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+		  <div>
+		   ${reader.result}
+			<a href="/play" class="alert-link">play message</a> 
+		  </div>
+		</div> `;
           container.appendChild(toaster);
         }
         reader.readAsText(event.data);
       }
     };
 
-    socketButton.addEventListener('click', () => {
-      ws.send('SMIL message has been generated and send. click pay to launch the message');
-    });
   </script>
 
   <script type="module">

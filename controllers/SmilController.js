@@ -4,6 +4,8 @@ const SmilModel = require('../models/SmilModel');
 const {
     v4: uuid
 } = require('uuid');
+const WebSocket = require('ws');
+const socketServer = new WebSocket("ws://localhost:5000")
 
 exports.index = (req, res) => {
     SmilModel.findAll()
@@ -100,6 +102,7 @@ exports.generate = async(req, res) => {
         .then(smil => {
             smil = smil.map(item => item.dataValues);
             addSmilContent(smil);
+			socketServer.send("New message has been sent, click to play");
             req.session.message = "Smil content has been generated";
         })
         .catch(err => console.log('fetch error ', err));

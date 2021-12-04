@@ -2,9 +2,12 @@ const Message = require('../models/MessageModel');
 const SmilModel = require('../models/SmilModel');
 const fs = require('fs');
 const path = require('path');
+const WebSocket = require('ws');
 const {
     exec
 } = require("child_process");
+
+const socketServer = new WebSocket('ws://localhost:5000');
 
 exports.index = (req, res) => {
     Message.findAll().
@@ -20,6 +23,7 @@ exports.create = (req, res) => res.render('messages/create');
 exports.store = (req, res) => {
     Message.create()
         .then(message => {
+			socketServer.send("Message has been sent. Refresh and see");
             res.status(200).redirect('/messages');
         })
         .catch(error => console.log('create message error: ', error));
