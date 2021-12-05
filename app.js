@@ -20,12 +20,12 @@ const socketServer = new WebSocket.Server({ port: 5000 });
 socketServer.on('connection', (socket) => {
     socket.on('message', (message) => {
         // socketServer.clients.forEach(client => client.send(message)); /* Send messages to all clients */
-		socketServer.clients.forEach(wsClient => {
-			if(wsClient !== socketServer.client) {
-				wsClient.send(message);
-			}
-		})	
-		console.log('Socket clients: ', socketServer.clients);
+        socketServer.clients.forEach(wsClient => {
+            if (wsClient !== socketServer.client) {
+                wsClient.send(message);
+            }
+        });
+        console.log('Socket clients: ', socketServer.clients);
     });
 });
 
@@ -55,8 +55,8 @@ app.use(express.static('public'));
 // setup templating engine with handlebars
 app.engine('.hbs', handlebars({
     defaultLayout: 'main',
- 
-   extname: '.hbs',
+
+    extname: '.hbs',
     partialsDir: path.join(__dirname, '/views/partials/')
 }));
 app.set('view engine', 'hbs');
@@ -94,4 +94,3 @@ sequelize.sync();
 // });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
-

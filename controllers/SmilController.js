@@ -41,15 +41,15 @@ exports.create = (req, res) => {
             // creat a file with `fileName` in the publick dir
             const filePath = path.join(__dirname, '../public/', `${fileName}.txt`);
             fs.writeFile(filePath, textContent, (error) => console.log('And error occured: ', error));
-            smilContent = `<text src = "./public/${fileName}.txt" begin="${delay || 1}s" region = "Text" />`;
+            smilContent = `<text src="./public/${fileName}.txt" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Text" />`;
             content = textContent;
             break;
         case 'image':
-            smilContent = `<img src="${imageUrl}" begin="${delay || 1}s" region="Text" />`;
+            smilContent = `<img src="${imageUrl}" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Image" />`;
             content = imageUrl;
             break;
         case 'video':
-            smilContent = `<video src="${videoUrl}" begin="${delay || 1}s" region="Text" />`;
+            smilContent = `<video src="${videoUrl}" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Image" />`;
             content = videoUrl;
             break;
         case 'imageFile':
@@ -58,7 +58,7 @@ exports.create = (req, res) => {
                 imageFileSrc
             } = req.files;
             const file = imageFileSrc[0];
-            smilContent = `<img src = "public/images/${file.filename}" begin="${delay || 1}s" region="Text" />`;
+            smilContent = `<img src="public/images/${file.filename}" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Image" />`;
             content = "public/images/${file.filename}";
             break;
         case 'videoFile':
@@ -66,7 +66,7 @@ exports.create = (req, res) => {
                 videoFileSrc
             } = req.files;
             const video = videoFileSrc[0];
-            smilContent = `<video src = "public/images/${video.filename}" begin="${delay || 1}s" region="Text" />`;
+            smilContent = `<video src="public/images/${video.filename}" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Image" />`;
             content = "public/images/${video.filename}";
             break;
     }
@@ -102,7 +102,7 @@ exports.generate = async(req, res) => {
         .then(smil => {
             smil = smil.map(item => item.dataValues);
             addSmilContent(smil);
-			socketServer.send("New message has been sent, click to play");
+            socketServer.send("New message has been sent, click to play");
             req.session.message = "Smil content has been generated";
         })
         .catch(err => console.log('fetch error ', err));
@@ -114,6 +114,7 @@ const getSmilContentHeader = () => {
     return `<smil>
   <head>
     <layout>
+      <region id="Image" height="100%" width="100%" fit="meet"/>
       <region id="Text" height="100%" width="100%" fit="scroll"/>
     </layout>
   </head>

@@ -2,12 +2,19 @@
     <smil>
   <head>
     <layout>
+      <region id="Image" height="100%" width="100%" fit="meet"/>
       <region id="Text" height="100%" width="100%" fit="scroll"/>
     </layout>
   </head>
   <body>
-        <par dur= "4s">
-            <text src = "./public/test.txt" begin="1s" region = "Text" />
+        <par dur= "3s">
+            <img src="https://picsum.photos/200" begin="1s" top="100" left="200" region="Image" />
+        </par>
+        <par dur= "5s">
+            <text src="./public/test.txt" begin="1s" top="100" left="80" region="Text" />
+        </par>
+        <par dur= "5s">
+            <text src="./public/test.txt" begin="1s" top="100" left="50" region="Text" />
         </par>
         
     </body>
