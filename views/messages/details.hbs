@@ -4,7 +4,7 @@
 <a href="/messages/preview" class="btn btn-sm btn-warning d-none">preview</a>
 <button class="d-none btn btn-sm btn-info" id="send-message">send</button>
 {{#if data }}
-<table class="table stripped mt-4">
+<table class="table mt-4 stripped">
   <thead>
     <tr>
       <th>Id</th>
@@ -33,7 +33,7 @@
   </tbody>
 </table>
 {{else }}
-<div class="alert alert-info mt-4">
+<div class="mt-4 alert alert-info">
   <p class="mb-0">There are not messages for this file</p>
 </div>
 {{/if }}
@@ -71,14 +71,14 @@
                   <input type="radio" class="form-radio-input" name="contentType" value="imageFile" checked>
                   Image from local machine
                 </label>
-                <label class="py-2 form-check-label d-block">
+                {{!-- <label class="py-2 form-check-label d-block">
                   <input type="radio" class="form-radio-input" name="contentType" value="video" checked>
                   Video url
                 </label>
                 <label class="py-2 form-check-label d-block">
                   <input type="radio" class="form-radio-input" name="contentType" value="videoFile" checked>
                   Video from local machine
-                </label>
+                </label> --}}
               </div>
               <div class="form-group">
                 <button class="px-3 btn btn-sm btn-primary btn-next" data-step='2' id="step-one-button">next</button>

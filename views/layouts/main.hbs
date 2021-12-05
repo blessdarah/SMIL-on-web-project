@@ -227,7 +227,10 @@
     playButton.addEventListener('click', e => {
       e.preventDefault(); // benefit of doubt
       fetch("localhost:8000/play", { method: "get" })
-        .then(res => console.log('res'))
+        .then(res =>
+          fetch("localhost:8000/generate", { method: "get" })
+            .then(result => console.log("result: ", result))
+        )
         .catch(err => console.log('err: ', err));
     });
 

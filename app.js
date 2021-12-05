@@ -11,15 +11,12 @@ const upload = multer({
 const port = process.env.PORT || 8000;
 const app = express();
 
-// const http = require('http');
-// const server = http.createServer(app);
-
 // allow socket to listen to server
 const socketServer = new WebSocket.Server({ port: 5000 });
 
 socketServer.on('connection', (socket) => {
     socket.on('message', (message) => {
-        // socketServer.clients.forEach(client => client.send(message)); /* Send messages to all clients */
+        // socketServer.clients.forEach(client => client.send(message));
         socketServer.clients.forEach(wsClient => {
             if (wsClient !== socketServer.client) {
                 wsClient.send(message);
@@ -55,7 +52,6 @@ app.use(express.static('public'));
 // setup templating engine with handlebars
 app.engine('.hbs', handlebars({
     defaultLayout: 'main',
-
     extname: '.hbs',
     partialsDir: path.join(__dirname, '/views/partials/')
 }));
@@ -70,6 +66,7 @@ const uploadHandler = upload.fields([{
         maxCount: 1
     }
 ]);
+
 // Setup routing
 app.get('/home', SmilController.home);
 app.post('/smil-messages/:id/delete', SmilController.delete);
@@ -88,9 +85,9 @@ app.get('/messages/preview', MessagesController.preview);
 app.get('/play', MessagesController.play);
 
 // DB
-sequelize.sync();
-// sequelize.sync({
-//     force: true
-// });
+// sequelize.sync();
+sequelize.sync({
+    force: true
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

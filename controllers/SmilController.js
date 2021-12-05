@@ -138,12 +138,9 @@ function addSmilContent(smilDataList) {
     const smilContent = `
     ${getSmilContentHeader()}
         ${listContent}
-    ${getSmilContentFooter()}
-    `;
+    ${getSmilContentFooter()}`;
 
     // write content to smile file
     fs.writeFile(path.join(__dirname, '../test.smil'), smilContent, (error) => error ? console.log('writing to file error: ', error) : '');
     fs.writeFile(path.join(__dirname, '../preview.txt'), smilContent, (error) => error ? console.log('writing to file error: ', error) : '');
-
-    // run command to open file with smil player
 }

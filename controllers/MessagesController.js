@@ -23,7 +23,7 @@ exports.create = (req, res) => res.render('messages/create');
 exports.store = (req, res) => {
     Message.create()
         .then(message => {
-            socketServer.send("Message has been sent. Refresh and see.");
+            socketServer.send("There is a new message,refresh and see.");
             res.status(200).redirect('/messages');
         })
         .catch(error => console.log('create message error: ', error));
