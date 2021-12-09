@@ -8,7 +8,7 @@
   </head>
   <body>
         <par dur= "5s">
-            <text src="./public/test.txt" begin="2s" top="50" left="100" region="Text" />
+            <text src="./public/test.txt" begin="2s" top="100" left="50" region="Text" />
         </par>
         
     </body>

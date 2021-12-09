@@ -5,7 +5,8 @@ const {
     v4: uuid
 } = require('uuid');
 const WebSocket = require('ws');
-const socketServer = new WebSocket("ws://localhost:5000")
+const { request } = require('http');
+const socketServer = new WebSocket("ws://localhost:7000");
 
 exports.index = (req, res) => {
     SmilModel.findAll()
@@ -81,12 +82,94 @@ exports.create = (req, res) => {
             duration,
             delay,
             leftPosition,
-            topPosition
+            rightPosition: topPosition
         }).then(response => response)
         .catch(error => console.error('Could not create smil data: ', error));
 
     res.redirect(`/messages/${file}/details`);
 };
+
+exports.update = (req, res) => {
+    const file = req.session.file;
+    console.log("Update smil message content: ", req.body);
+    const {
+        contentType,
+        textContent,
+        fileName,
+        imageUrl,
+        videoUrl,
+        leftPosition,
+        topPosition,
+        duration,
+        delay
+    } = req.body;
+
+    let smilContent, content;
+    switch (contentType) {
+        case 'text':
+            // creat a file with `fileName` in the publick dir
+            const filePath = path.join(__dirname, '../public/', `${fileName}.txt`);
+            fs.writeFile(filePath, textContent, (error) => console.log('And error occured: ', error));
+            smilContent = `<text src="./public/${fileName}.txt" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Text" />`;
+            content = textContent;
+            break;
+        case 'image':
+            smilContent = `<img src="${imageUrl}" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Image" />`;
+            content = imageUrl;
+            break;
+        case 'video':
+            smilContent = `<video src="${videoUrl}" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Image" />`;
+            content = videoUrl;
+            break;
+        case 'imageFile':
+            // handle image upload and return image file path
+            const {
+                imageFileSrc
+            } = req.files;
+            const file = imageFileSrc[0];
+            smilContent = `<img src="public/images/${file.filename}" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Image" />`;
+            content = "public/images/${file.filename}";
+            break;
+        case 'videoFile':
+            const {
+                videoFileSrc
+            } = req.files;
+            const video = videoFileSrc[0];
+            smilContent = `<video src="public/images/${video.filename}" begin="${delay || 1}s" top="${topPosition}" left="${leftPosition}" region="Image" />`;
+            content = "public/images/${video.filename}";
+            break;
+    }
+
+    // save content to database
+    SmilModel.update({
+            file: file,
+            contentType: contentType,
+            content: content,
+            smilContent: smilContent,
+            duration: duration,
+            delay: delay,
+            leftPosition: leftPosition,
+            rightPosition: topPosition
+        }, {
+            where: { smil_id: req.params.id }
+        }).then(response => console.log("new data updated successfully", response))
+        .catch(error => console.error('Could not create smil data: ', error));
+
+    res.redirect(`/messages/${file}/details`);
+};
+
+exports.edit = (req, res) => {
+    SmilModel.findAll({
+            where: {
+                smil_id: req.params.id
+            }
+        }).then(result => {
+            const message = result.map(item => item.dataValues);
+            return res.status(200).json(message);
+        })
+        .catch(error => console.log("error editing message: ", error));
+};
+
 
 exports.delete = (req, res) => {
     SmilModel.destroy({

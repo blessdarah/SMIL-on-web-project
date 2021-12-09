@@ -7,7 +7,7 @@ const {
     exec
 } = require("child_process");
 
-const socketServer = new WebSocket('ws://localhost:5000');
+const socketServer = new WebSocket('ws://localhost:7000');
 
 exports.index = (req, res) => {
     Message.findAll().
@@ -65,7 +65,6 @@ exports.details = (req, res) => {
 };
 
 exports.show = (req, res) => {
-    // req.session.file = req.params.id;
     SmilModel.findAll({
             where: {
                 smil_id: req.params.id
@@ -78,6 +77,7 @@ exports.show = (req, res) => {
         })
         .catch(error => console.log('message detail error: ', error));
 };
+
 
 exports.preview = (req, res) => {
     // read data in preview file

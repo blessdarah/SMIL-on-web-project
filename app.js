@@ -12,7 +12,7 @@ const port = process.env.PORT || 8000;
 const app = express();
 
 // allow socket to listen to server
-const socketServer = new WebSocket.Server({ port: 5000 });
+const socketServer = new WebSocket.Server({ port: 7000 });
 
 socketServer.on('connection', (socket) => {
     socket.on('message', (message) => {
@@ -72,7 +72,8 @@ app.get('/home', SmilController.home);
 app.post('/smil-messages/:id/delete', SmilController.delete);
 app.post('/create', uploadHandler, SmilController.create);
 app.get('/generate', SmilController.generate);
-
+app.get('/edit-message/:id', SmilController.edit);
+app.post('/update-message/:id', SmilController.update);
 // messages
 app.get('/', MessagesController.index);
 app.get('/messages', MessagesController.index);
@@ -85,9 +86,9 @@ app.get('/messages/preview', MessagesController.preview);
 app.get('/play', MessagesController.play);
 
 // DB
-// sequelize.sync();
-sequelize.sync({
-    force: true
-});
+sequelize.sync();
+// sequelize.sync({
+//     force: true
+// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

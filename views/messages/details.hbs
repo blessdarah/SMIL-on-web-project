@@ -20,13 +20,17 @@
       <td>{{smil_id}}</td>
       <td>{{contentType}}</td>
       <td>{{duration}}s</td>
-      <td>
-        <form method="post" action="/smil-messages/{{smil_id}}/delete" class="form-inline form">
+      <td class="d-flex">
+        <form method="post" action="/smil-messages/{{smil_id}}/delete" class="mr-2 form-inline form"
+          style="margin-right: 1rem">
           <button type="submit" class="btn btn-sm btn-danger">delete</button>
         </form>
 
-        <a href="/message/{{smil_id}}/show" class="btn btn-sm btn-success">show</a>
-        <button class="btn btn-sm btn-info">update</button>
+        <div class="ml-2 d-inline-block">
+          <a href="/message/{{smil_id}}/show" class="btn btn-sm btn-success">show</a>
+          <a href="#" class="btn btn-sm btn-info btn-edit d-none" data-id="{{smil_id}}">edit</a>
+        </div>
+
       </td>
     </tr>
     {{/each }}
@@ -60,15 +64,16 @@
               <div class="mb-3 form-group">
                 <p class="mb-1">Select the content type you want to add</p>
                 <label class="py-2 form-check-label d-block">
-                  <input type="radio" class="form-radio-input" name="contentType" value="text" checked>
+                  <input type="radio" class="form-radio-input" name="contentType" value="text" id="contentTypeText">
                   Text
                 </label>
                 <label class="py-2 form-check-label d-block">
-                  <input type="radio" class="form-radio-input" name="contentType" value="image" checked>
+                  <input type="radio" class="form-radio-input" name="contentType" value="image" id="contentTypeImage">
                   Image url
                 </label>
                 <label class="py-2 form-check-label d-block">
-                  <input type="radio" class="form-radio-input" name="contentType" value="imageFile" checked>
+                  <input type="radio" class="form-radio-input" name="contentType" value="imageFile"
+                    id="contentTypeImageFile">
                   Image from local machine
                 </label>
                 {{!-- <label class="py-2 form-check-label d-block">
